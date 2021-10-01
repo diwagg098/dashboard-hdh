@@ -165,6 +165,30 @@
         </div>
     </div>
     </div>
+    <script type="text/javascript">
+           /* JS comes here */
+    askForApproval({{$reservCount}});
+    
+    function askForApproval(reserv) {
+        if(Notification.permission === "granted") {
+            createNotification('HDH HOTEL', 'Hallo ada ' + reserv + ' reservasi nih baru masuk');
+        }
+        else {
+            Notification.requestPermission(permission => {
+                if(permission === 'granted') {
+                    createNotification('Wow! This is great', 'created by @study.tonight', 'https://www.studytonight.com/css/resource.v2/icons/studytonight/st-icon-dark.png');
+                }
+            });
+        }
+    }
+    
+    function createNotification(title, text, icon) {
+        const noti = new Notification(title, {
+            body: text,
+            icon
+        });
+    }
+    </script>
        <script>
       var ctx = document.getElementById('myChart');
       var myChart = new Chart(ctx, {
@@ -257,21 +281,5 @@ $(document).ready(function() {
 });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
-<script>
-    Push.Permission.request();
 
-    function notif() {
-        Push.create('Ada orderan masuk nihhhh', {
-            body: 'Kamu punya 2 Orderan',
-            icon: '{{ asset("/img/mlogo.png")}}',
-            timeout: 10000,                  // Timeout before notification closes automatically.
-            vibrate: [100, 100, 100],       // An array of vibration pulses for mobile devices.
-            onClick: function() {
-                // Callback for when the notification is clicked. 
-                console.log(this);
-            }  
-        });
-    };
-
-</script>
 @endsection
