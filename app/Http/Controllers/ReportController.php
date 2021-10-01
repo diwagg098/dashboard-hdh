@@ -18,6 +18,7 @@ class ReportController extends Controller
             return redirect('/login');
         }
 
+
         $day = date('Y-m-d');
         $reserv = DB::table('billing')
             ->join('booking', 'booking.cart_id', '=', 'billing.id_cart')

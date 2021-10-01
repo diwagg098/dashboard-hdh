@@ -24,8 +24,19 @@ class RoomsController extends Controller
             Alert::info('', 'Silahkan login terlebih dahulu');
             return redirect('/login');
         }
+        $reserv = DB::table('cartroom')->join('guest', 'guest.guest_id', '=', 'cartroom.id_guest')
+            ->join('booking', 'booking.cart_id', '=', 'cartroom.cartr_id')
+            ->join('billing', 'billing.id_cart', '=', 'cartroom.cartr_id')
+            ->where('booking.status_booking', 0)->where('billing.status_code', '200')->select(['name'])->get();
         $content = DB::table('rooms')->get();
-        return view('rooms.index', compact('content'));
+        $reservCount = $reserv->count();
+
+        $data = [
+            'content' => $content,
+            'reserv' => $reserv,
+            'reservCount' => $reservCount
+        ];
+        return view('rooms.index', $data);
     }
 
     /**

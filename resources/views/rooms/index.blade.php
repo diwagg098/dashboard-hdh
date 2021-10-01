@@ -35,20 +35,23 @@
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="material-icons">notifications</i>
-                <span class="notification">5</span>
+                <span class="notification">{{ $reservCount}}</span>
                 <p class="d-lg-none d-md-block">
-                  Some Actions
+                    Some Actions
                 </p>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                <a class="dropdown-item" href="#">Another Notification</a>
-                <a class="dropdown-item" href="#">Another One</a>
-              </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    @if (!$reserv)
+                        <a class="dropdown-item" href="#"></a>
+                    @else
+                    @foreach ($reserv as $reservv)
+                    <a class="dropdown-item" href="{{ url('report')}}">Ada pesanan baru nih dari {{ $reservv->name}}</a>
+                    @endforeach
+                    @endif
+                </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -108,7 +111,9 @@
 </div>
 <div class="col">
   <div class="d-inline">
-    <form action="{{ url('rooms/delete/' . $row->id_kamar)}}" style="padding: 0 !important;">
+    <form action="{{ url('rooms/delete/' . $row->id_kamar)}}" style="padding: 0 !important;" method="POST">
+      @csrf
+      @method("delete")
       <button type="submit" data-toggle="tooltip" title="Delete" onclick="return confirm('Anda yakin akan menghapus kamar ini ?')" class="btn btn-danger btn-round" style="padding: :0 !important;">Hapus</button>
     </form>
   </div>

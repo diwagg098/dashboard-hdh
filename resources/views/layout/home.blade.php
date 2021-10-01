@@ -247,4 +247,31 @@
         }
       });
 </script>
+<script>
+$(document).ready(function() {
+    $("#container").load("home.blade.php");
+    var refreshId = setInterval(function()
+        {
+            $("#container").load("home.blade.php");
+        }, 1000);
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+<script>
+    Push.Permission.request();
+
+    function notif() {
+        Push.create('Ada orderan masuk nihhhh', {
+            body: 'Kamu punya 2 Orderan',
+            icon: '{{ asset("/img/mlogo.png")}}',
+            timeout: 10000,                  // Timeout before notification closes automatically.
+            vibrate: [100, 100, 100],       // An array of vibration pulses for mobile devices.
+            onClick: function() {
+                // Callback for when the notification is clicked. 
+                console.log(this);
+            }  
+        });
+    };
+
+</script>
 @endsection
