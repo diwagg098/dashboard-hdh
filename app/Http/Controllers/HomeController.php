@@ -43,6 +43,10 @@ class HomeController extends Controller
         // dd($reserv);
         $reservCount = $reserv->count();
         $datap = DB::table('pengunjung')->where('date', $date)->count();
+        $today = DB::table('billing')->where('checkin', date('Y-m-d'))
+            ->join('booking', 'booking.cart_id', '=', 'billing.id_cart')
+            ->join('cartroom', 'cartroom.cartr_id', '=', 'booking.cart_id')
+            ->count();
 
         $data = [
             'datap' => $datap,
@@ -50,7 +54,8 @@ class HomeController extends Controller
             'chart' => $chart,
             'guest' => $guest,
             'reserv' => $reserv,
-            'reservCount' => $reservCount
+            'reservCount' => $reservCount,
+            'today' => $today
         ];
 
         // dd($data);

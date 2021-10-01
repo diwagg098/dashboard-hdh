@@ -100,7 +100,7 @@
                     <i class="material-icons">store</i>
                 </div>
                 <p class="card-category">Tamu hari ini</p>
-                <h3 class="card-title">50</h3>
+                <h3 class="card-title">{{ $today}}</h3>
                 </div>
                 <div class="card-footer">
                 <div class="stats">
@@ -133,7 +133,8 @@
                   <canvas id="myChart" width="200" height="74"></canvas>
                 </div>
                 <div class="card-body">
-                  <p class="card-category">
+                  <p class="card-category text-center" style="font-style: italic">
+                      Bulan
                   </p>
                 </div>
                 <div class="card-footer">
@@ -147,11 +148,12 @@
         <div class="row">
             <div class="col-md-12">
               <div class="card card-chart">
-                <div class="card-header card-header"><h3>Data statistik reservasi bulan ini</h3>
+                <div class="card-header card-header"><h3>Data statistik Pengunjung bulan ini</h3>
                   <canvas id="myChart2" width="200" height="74"></canvas>
                 </div>
                 <div class="card-body">
-                  <p class="card-category">
+                  <p class="card-category text-center" style="font-style: italic">
+                      Bulan
                   </p>
                 </div>
                 <div class="card-footer">
@@ -220,11 +222,20 @@
         },
         options: {
             scales: {
+                xAxes : [{
+                    display:true,
+                    scaleLabel : {
+                        display: true,
+                        labelString: 'Month'
+                    }
+                }],
                 y: {
                     beginAtZero: true,
                     override: true,
-                                stepValue: 5,
-                                max: 50
+                    stepValue: 5,
+                    max: 50,
+                    display: true,
+                    labelString: 'Month'
 
                 }
             }

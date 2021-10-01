@@ -32,30 +32,24 @@ class GalleryController extends Controller
             ]
         );
 
-        $file = $request->file('foto');
+        $file = $request->hasFile('files');
 
-        if (!$file) {
-            Alert::error('Error', 'Belum ada foto yang di upload');
-            return redirect('/gallery/create');
-        } else {
-            $fileExt = $file->getClientOriginalExtension();
-            $fileName = 'Gallery-' . date('YmdHis') . '.' . $fileExt;
-            $file->move(public_path() . '/images/gallery', $fileName);
+        if ($file) {
+            foreach ($request->file('files') as $image) {
+                $file = $image->getCLientOriginalName();
+                $image->move(public_path() . '/images/gallery', $file);
+                $dataImage[] = $file;
+
+                $data = [
+                    'upload_path' => $file,
+                    'created_at' => date('Y-m-d')
+                ];
+                DB::table('gallery')->insert($data);
+            }
         }
 
-        $data = [
-            'upload_path' => $fileName,
-            'created_at' => date('Y-m-d')
-        ];
 
-        $save = DB::table('gallery')->insert($data);
-        if ($save) {
-            Alert::success('Success', 'Foto telah ditambahkan ke Gallery');
-            return redirect('/gallery');
-        } else {
-            Alert::error('Error', 'Oops terjadi kesalahan');
-            return redirect('/gallery/create');
-        }
+        return redirect('/gallery');
     }
 
     public function delete($upload_path)
