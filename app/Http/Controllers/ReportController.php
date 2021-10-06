@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use Illuminate\Cache\RedisLock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -89,5 +90,23 @@ class ReportController extends Controller
         }
 
         // dd($content);
+    }
+
+    public function filterTanggal(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        if ($keyword == null) {
+            return redirect()->back();
+        }
+
+        return redirect('/report/search/result/' . $keyword);
+    }
+
+    public function searchResult($keyword)
+    {
+        $allreserv = DB::table('billing')->join('booking', 'booking.cart_id', '=', 'billing.id_cart')->join('cartroom', 'cartroom.cartr_id', '=', 'billing.id_cart')->where('cartroom.checkin', $keyword)->get();
+
+        return view('report.search', compact('allreserv'));
     }
 }

@@ -72,27 +72,7 @@
       </nav>
 
       {{-- Content --}}
-      <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-              <div class="card card-chart">
-                <div class="card-header card-header">
-                  <canvas id="myChart" width="200" height="74"></canvas>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
-                  <p class="card-category">
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+      <div class="content">          
 <!-- 
   
   Radio version of tabs.
@@ -126,6 +106,33 @@
         <button class="btn btn-round" id="download" onclick="downloadexcel('today_table')" style="background-color: #349148 !important; width: 20%;"><i class="material-icons">
 file_download
 </i> Download Excel</button>
+<button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #349148 !important; width: 20%;">
+  Cari Tanggal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Date Search</h5>
+        <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent !important;">x</button>
+      </div>
+      <form action="{{ url('/report/search')}}" method="POST">
+        @csrf
+        <div class="modal-body">
+          <div class="col-md-12">
+            <input type="date" name="keyword" class="form-control" value="{{ date('Y-m-d')}}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
       </div>
            <div class="table-responsive">
     <table class="table table-hover" id="example2" border="1">
@@ -231,11 +238,39 @@ check_circle
   </div>
   </section>
     <section id="rauchbier" class="tab-panel">
-        <div class="row">
-        <button class="btn btn-round" id="download" onclick="downloadexcel('allreserv_table')" style="background-color: #349148 !important; width: 20%;"><i class="material-icons">
+           <div class="row">
+        <button class="btn btn-round" id="download" onclick="downloadexcel('today_table')" style="background-color: #349148 !important; width: 20%;"><i class="material-icons">
 file_download
 </i> Download Excel</button>
+<button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="background-color: #349148 !important; width: 20%;">
+  Cari Tanggal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Date Search</h5>
+        <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent !important;">x</button>
       </div>
+      <form action="{{ url('/report/search')}}" method="POST">
+        @csrf
+        <div class="modal-body">
+          <div class="col-md-12">
+            <input type="date" name="keyword" class="form-control" value="{{ date('Y-m-d')}}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+      </div>
+<!-- Button trigger modal -->
     <div class="table-responsive">
     <table class="table table-hover" id="example" border="1">
       <thead>
@@ -344,6 +379,33 @@ check_circle
         <button class="btn btn-round" id="download" onclick="downloadexcel('checkin_table')" style="background-color: #349148 !important; width: 20%;"><i class="material-icons">
 file_download
 </i> Download Excel</button>
+<button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #349148 !important; width: 20%;">
+Cari Tanggal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Date Search</h5>
+  <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent !important;">x</button>
+</div>
+<form action="{{ url('/report/search')}}" method="POST">
+  @csrf
+  <div class="modal-body">
+    <div class="col-md-12">
+      <input type="date" name="keyword" class="form-control" value="{{ date('Y-m-d')}}">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
       </div>
     <div class="table-responsive">
     <table class="table table-hover" id="example3" border="1">

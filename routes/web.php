@@ -36,6 +36,7 @@ Route::get('/getChart/{year}/{week}', 'ReportController@chartReport');
 Route::post('/report/checkin/{id_booking}', 'ReportController@checkin');
 
 
+
 // Route Product
 Route::get('/products', 'ProductController@index');
 Route::get('/products/create', 'ProductController@create');

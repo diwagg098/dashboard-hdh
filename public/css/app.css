@@ -105,15 +105,12 @@ input:hover::placeholder {
     margin: 10px 0;
 }
 
-input[type="date"]::-webkit-inner-spin-button {
-    display: none;
-}
 
 .item i,
 input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     font-size: 20px;
-    color: #a9a9a9;
+    color: black;
 }
 
 .item i {
@@ -125,7 +122,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 [type="date"]::-webkit-calendar-picker-indicator {
     right: 1%;
     z-index: 2;
-    opacity: 0;
+    opacity: 1;
     cursor: pointer;
 }
 
